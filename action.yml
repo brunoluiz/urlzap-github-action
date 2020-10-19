@@ -1,0 +1,29 @@
+name: 'URLZap'
+description: 'Your own static URL generator (on Github Actions)'
+
+inputs:
+  config:
+    description: 'config.yml path'
+    required: true
+    default: './config.yml'
+
+  version:
+    description: 'URLZap version'
+    required: true
+    default: 'latest'
+
+runs:
+  using: "composite"
+  steps:
+    -
+      name: Installs latest URLZap
+      run: curl -s https://api.github.com/repos/brunoluiz/urlzap/releases/${{ inputs.version }} \
+        | grep "browser_download_url.*deb" \
+        | cut -d '"' -f 4 \
+        | wget -qi -
+      shell: bash
+
+    -
+      name: Runs URLZap
+      run: urlzap generate -c ${{ inputs.config }}
+      shell: bash
