@@ -1,10 +1,12 @@
-# urlzap
+<h1 align="center">
+  URLZap Github Action :zap:
+</h1>
 
-This Github Action will automatically generate your static URLs using `urlzap`. Paired with Github Page actions, you can automate your whole `urlzap` pipeline 🤖
+This Github Action will automatically generate your static URLs using [`urlzap`](https://github.com/brunoluiz/urlzap). Paired with Github Page actions, you can automate your whole `urlzap` pipeline 🤖
 
 ## Usage:
 
-To use it, call `brunoluiz/urlzap-github-action@v1` on your Github Action workflow. The example below:
+To use it, call [`brunoluiz/urlzap-github-action@v1`](https://github.com/marketplace/actions/urlzap) on your Github Action workflow. The example below:
 
 1. Generates the static URL files 
 2. Deploy to Github Pages, under `gh-pages` branch [(using this action)](https://github.com/marketplace/actions/deploy-to-github-pages).
