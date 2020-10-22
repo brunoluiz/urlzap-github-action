@@ -1,36 +1,45 @@
 # urlzap
 
-Your own URL manager, statically generated ⚡️
-
-- Keep your (shortned or not) URLs with you
-- No need to run a server (although supported)
-- Can be used with Github Page
+This Github Action will automatically generate your static URLs using `urlzap`. Paired with Github Page actions, you can automate your whole `urlzap` pipeline 🤖
 
 ## Usage:
 
-First set-up your URLs in `./config.yml`. Each key in the map will map to `/{key}` routes,
-redirecting to `{value}`. In the example below, `https://yourwebsite/google` will 
-redirect to Google and `https://yourwebsite/tools/github` to Github.
+To use it, call `brunoluiz/urlzap-github-action@v1` on your Github Action workflow. The example below:
+
+1. Generates the static URL files 
+2. Deploy to Github Pages, under `gh-pages` branch [(using this action)](https://github.com/marketplace/actions/deploy-to-github-pages).
 
 ```
-urls:
-  google: https://google.com
-  tools:
-    github: https://github.com
-path: './output' # default is './'
+name: urlzap
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Generate & Deploy
+    steps:
+    # Checkout your repo locally
+    - uses: actions/checkout@v2
+
+    # Generate files using this action
+    - name: Generate
+      uses: brunoluiz/urlzap-github-action@v1
+
+    # Deplloy in Github Pages (you can use others)
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: .
 ```
 
-To generate the static files, call `urlzap generate`.
+A project using the above config is [brunoluiz/_](https://www.youtube.com/channel/UCCYzx5UEwMxFSQAQwi8f_Mg). An example output is [https://brunoluiz.net/_/yt](https://brunoluiz.net/_/yt).
 
-## Usage with Github Pages:
+## Configuration:
 
-1. Enable Github Pages and set-up the branch where your static HTML files will be located.
-More details at [Github Pages guide](https://pages.github.com/)
-1. Update your `config.yml` with new URLs
-1. Commit and push to `main`
-1. Checkout to your Github Pages branch (usually `gh-pages`) and merge `main` into it
-1. Run `urlzap generate`
-1. Commit and push the results
+The `with` portion of the workflow can be configured with the following params.
 
-If you don't have any cache configured (eg: Cloudflare), it shouldn't a minute to get
-the updates.
+Key | Required | Default | Description
+--- | --- | --- | ---
+`version` | **No** | **latest** | Defines which `urlzap` version to use
