@@ -1,5 +1,9 @@
 name: 'urlzap'
-description: 'Your own static URL generator (on Github Actions)'
+description: 'Your own static URL generator (on Github Actions) 🤖'
+
+branding:
+  icon: 'box'
+  color: 'white'
 
 inputs:
   version:
