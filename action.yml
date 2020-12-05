@@ -9,6 +9,9 @@ inputs:
   version:
     description: 'urlzap version'
     default: 'latest'
+  config:
+    description: 'urlzap config path'
+    default: './config.yml'
 
 runs:
   using: "composite"
@@ -26,5 +29,5 @@ runs:
 
     -
       name: Generate
-      run: urlzap generate
+      run: urlzap generate --config ${{ inputs.config }}
       shell: bash
