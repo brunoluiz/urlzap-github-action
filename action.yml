@@ -24,12 +24,7 @@ runs:
         tar -xzf $tarball
         chmod +x urlzap
         sudo mv urlzap /usr/local/bin/
-        ls
-        rm -rf urlzap* README.md
-      shell: bash
-    -
-      name: Checks files
-      run: ls
+        rm -rf urlzap*tar.gz README.md
       shell: bash
 
     -
