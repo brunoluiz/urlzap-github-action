@@ -9,6 +9,9 @@ inputs:
   version:
     description: 'urlzap version'
     default: 'latest'
+  config:
+    description: 'urlzap config path'
+    default: './config.yml'
 
 runs:
   using: "composite"
@@ -21,10 +24,10 @@ runs:
         tar -xzf $tarball
         chmod +x urlzap
         sudo mv urlzap /usr/local/bin/
-        rm -rf urlzap* README.md
+        rm -rf urlzap*tar.gz README.md
       shell: bash
 
     -
       name: Generate
-      run: urlzap generate
+      run: urlzap generate --config ${{ inputs.config }}
       shell: bash
