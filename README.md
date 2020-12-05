@@ -45,3 +45,4 @@ The `with` portion of the workflow can be configured with the following params.
 Key | Required | Default | Description
 --- | --- | --- | ---
 `version` | **No** | **latest** | Defines which `urlzap` version to use
+`config` | **No** | **./config.yml** | Defines where URLZap config file is located
